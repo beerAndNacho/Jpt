@@ -1,3 +1,5 @@
+import './koharu.js';
+
 const SFX_KEY = 'kotonoha:sfx:v1';
 
 let enabled = true;
@@ -34,43 +36,14 @@ function tone(frequency, delay = 0, duration = 0.07, gain = 0.035, type = 'sine'
 
 function play(name) {
   if (!enabled) return;
-  if (name === 'tap') {
-    tone(520, 0, 0.035, 0.018, 'sine');
-    return;
-  }
-  if (name === 'flip') {
-    tone(360, 0, 0.04, 0.018, 'triangle');
-    tone(520, 0.028, 0.045, 0.018, 'triangle');
-    return;
-  }
-  if (name === 'correct') {
-    tone(660, 0, 0.08, 0.033, 'sine');
-    tone(880, 0.065, 0.11, 0.028, 'sine');
-    return;
-  }
-  if (name === 'wrong') {
-    tone(260, 0, 0.08, 0.025, 'triangle');
-    tone(220, 0.07, 0.1, 0.018, 'triangle');
-    return;
-  }
-  if (name === 'hard') {
-    tone(430, 0, 0.06, 0.022, 'triangle');
-    tone(500, 0.05, 0.07, 0.018, 'triangle');
-    return;
-  }
-  if (name === 'easy') {
-    tone(740, 0, 0.07, 0.025, 'sine');
-    tone(930, 0.055, 0.08, 0.025, 'sine');
-    tone(1180, 0.115, 0.12, 0.022, 'sine');
-    return;
-  }
-  if (name === 'combo') {
-    [587, 740, 880, 1175].forEach((freq, index) => tone(freq, index * 0.055, 0.12, 0.028, 'sine'));
-    return;
-  }
-  if (name === 'levelup') {
-    [523, 659, 784, 1047].forEach((freq, index) => tone(freq, index * 0.075, 0.16, 0.034, 'triangle'));
-  }
+  if (name === 'tap') { tone(520, 0, 0.035, 0.018, 'sine'); return; }
+  if (name === 'flip') { tone(360, 0, 0.04, 0.018, 'triangle'); tone(520, 0.028, 0.045, 0.018, 'triangle'); return; }
+  if (name === 'correct') { tone(660, 0, 0.08, 0.033, 'sine'); tone(880, 0.065, 0.11, 0.028, 'sine'); return; }
+  if (name === 'wrong') { tone(260, 0, 0.08, 0.025, 'triangle'); tone(220, 0.07, 0.1, 0.018, 'triangle'); return; }
+  if (name === 'hard') { tone(430, 0, 0.06, 0.022, 'triangle'); tone(500, 0.05, 0.07, 0.018, 'triangle'); return; }
+  if (name === 'easy') { tone(740, 0, 0.07, 0.025, 'sine'); tone(930, 0.055, 0.08, 0.025, 'sine'); tone(1180, 0.115, 0.12, 0.022, 'sine'); return; }
+  if (name === 'combo') { [587, 740, 880, 1175].forEach((freq, index) => tone(freq, index * 0.055, 0.12, 0.028, 'sine')); return; }
+  if (name === 'levelup') { [523, 659, 784, 1047].forEach((freq, index) => tone(freq, index * 0.075, 0.16, 0.034, 'triangle')); }
 }
 
 function injectStyle() {
@@ -123,19 +96,9 @@ renderToggle();
 document.addEventListener('click', (event) => {
   const target = event.target;
   if (!(target instanceof Element)) return;
-
-  if (target.closest('#sfxToggle')) {
-    toggleSound();
-    return;
-  }
-
+  if (target.closest('#sfxToggle')) { toggleSound(); return; }
   if (target.closest('#speakButton, #quizSpeak, [data-speak]')) return;
-
-  if (target.closest('#wordCard')) {
-    play('flip');
-    return;
-  }
-
+  if (target.closest('#wordCard')) { play('flip'); return; }
   const grade = target.closest('button[data-grade]');
   if (grade) {
     const value = grade.dataset.grade;
@@ -146,7 +109,6 @@ document.addEventListener('click', (event) => {
     maybePlayLevelUp();
     return;
   }
-
   const option = target.closest('#optionGrid button');
   if (option) {
     setTimeout(() => {
@@ -155,20 +117,11 @@ document.addEventListener('click', (event) => {
       if (option.classList.contains('correct')) {
         if (combo > 0 && combo % 5 === 0) play('combo');
         else play('correct');
-      } else if (option.classList.contains('wrong')) {
-        play('wrong');
-      }
+      } else if (option.classList.contains('wrong')) play('wrong');
       maybePlayLevelUp();
     }, 0);
     return;
   }
-
-  if (target.closest('.level-card')) {
-    play('easy');
-    return;
-  }
-
-  if (target.closest('.primary, .soft-button, .village-card, .bottom-nav button, .back-button, .filter-segment button, .brand')) {
-    play('tap');
-  }
+  if (target.closest('.level-card')) { play('easy'); return; }
+  if (target.closest('.primary, .soft-button, .village-card, .bottom-nav button, .back-button, .filter-segment button, .brand')) play('tap');
 });
