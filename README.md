@@ -29,6 +29,10 @@
 - 일본어 / 읽기 / 뜻 검색
 - localStorage 자동 저장
 - 모바일 반응형 UI
+- Web Audio 기반 효과음 + 🔊/🔇 토글
+- 코하루 눈 깜빡임 / 꼬리 흔들기 / 표정 반응 / 말풍선
+- 정답·오답·콤보·학습 평가에 따른 코하루 리액션
+- 코하루 레벨 성장 장식: Lv.3 부적, Lv.5 꽃, Lv.8 목도리 변화, Lv.12 반짝임
 - 외부 AI/API 사용 없음
 
 ## 학습 구조
@@ -76,7 +80,10 @@ src/
   data.js       # JLPT 스타터 단어 데이터
   learning.js   # SRS / 덱 / XP / streak
   app.js        # UI와 학습 흐름
-  styles.css    # 마을/마스코트/모바일 UI
+  styles.css    # 마을/기본 모바일 UI
+  sfx.js        # Web Audio 효과음
+  koharu.css    # 코하루 표정/성장/애니메이션
+  koharu.js     # 코하루 리액션/말풍선
 tests/
   learning.test.js
 docs/
@@ -85,7 +92,7 @@ docs/
 
 ## 비용
 
-현재 버전은 외부 AI API를 사용하지 않습니다. 일본어 음성은 지원 브라우저의 Web Speech API를 사용하므로 별도 OpenAI API 비용이 없습니다.
+현재 버전은 외부 AI API를 사용하지 않습니다. 일본어 음성은 지원 브라우저의 Web Speech API, 효과음은 Web Audio API를 사용하므로 별도 OpenAI API 비용이 없습니다.
 
 ## 다음 고도화 후보
 
@@ -97,5 +104,6 @@ docs/
 6. 문장 배열 게임
 7. 일일 미션 / 업적
 8. 코하루 방 꾸미기와 아이템
-9. 로그인 / 클라우드 동기화
-10. 선택형 AI 회화 연습
+9. 코하루 의상 / 표정 컬렉션
+10. 로그인 / 클라우드 동기화
+11. 선택형 AI 회화 연습
