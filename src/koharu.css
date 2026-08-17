@@ -1,0 +1,76 @@
+/* Koharu character layer: expressions, evolution, and micro-animations */
+.mascot-stage{isolation:isolate}
+.fox{transform-origin:50% 100%;animation:koharu-idle 3.2s ease-in-out infinite}
+.fox-tail{animation:koharu-tail 2.2s ease-in-out infinite;will-change:transform}
+.eye{transform-origin:center;animation:koharu-blink 5.2s infinite}
+.ear{transition:transform .22s ease,top .22s ease}
+.fox-head,.fox-body,.scarf{transition:transform .22s ease,filter .22s ease}
+
+.fox-mouth{position:absolute;left:58px;top:79px;width:11px;height:6px;border-bottom:2px solid #6a4b51;border-radius:0 0 10px 10px;z-index:7;transition:.2s}
+.fox-paw{position:absolute;width:26px;height:42px;border-radius:45% 45% 48% 48%;background:#eda074;bottom:16px;z-index:6;transform-origin:50% 90%}
+.fox-paw.left{left:55px}.fox-paw.right{left:111px}
+.fox-charm{position:absolute;left:90px;top:132px;width:13px;height:13px;border-radius:50%;background:#ffd66f;border:2px solid rgba(255,255,255,.72);z-index:8;box-shadow:0 2px 6px rgba(95,67,53,.15);opacity:0;transform:scale(.6);transition:.28s}
+.fox-flower{position:absolute;left:40px;top:19px;width:24px;height:24px;z-index:9;opacity:0;transform:scale(.6) rotate(-20deg);transition:.28s}
+.fox-flower:before{content:'✿';position:absolute;font-size:24px;line-height:1;color:#f58e9f;text-shadow:0 1px 0 #fff}
+.fox-star{position:absolute;right:-4px;top:18px;font-size:28px;color:#f3c65c;opacity:0;transform:scale(.4) rotate(-20deg);z-index:10;pointer-events:none}
+
+.koharu-speech{position:absolute;left:25px;top:72px;max-width:190px;padding:9px 12px;border-radius:14px 14px 14px 4px;background:rgba(255,255,255,.9);border:1px solid rgba(100,80,70,.07);box-shadow:0 8px 20px rgba(90,65,60,.08);color:#74686f;font-size:10px;line-height:1.45;z-index:12;transition:.22s;animation:koharu-speech-in .28s both}
+.koharu-speech b{color:#df7f69}
+
+.fox.evo-2 .fox-charm{opacity:1;transform:scale(1)}
+.fox.evo-3 .fox-flower{opacity:1;transform:scale(1) rotate(-8deg)}
+.fox.evo-4 .scarf{background:#8c77b0}
+.fox.evo-4 .scarf:after{background:#8c77b0}
+.fox.evo-5 .fox-head{filter:drop-shadow(0 0 8px rgba(255,204,92,.25))}
+
+.fox.mood-happy{animation:koharu-hop .55s cubic-bezier(.2,.8,.25,1)}
+.fox.mood-happy .fox-mouth{width:14px;height:8px;left:56px;border-bottom-width:3px}
+.fox.mood-happy .blush{background:rgba(239,114,112,.42)}
+.fox.mood-happy .fox-tail{animation:koharu-tail-fast .32s ease-in-out 4}
+
+.fox.mood-oops .ear.left{transform:rotate(-34deg) translateY(8px)}
+.fox.mood-oops .ear.right{transform:rotate(34deg) translateY(8px)}
+.fox.mood-oops .fox-head{transform:translateY(5px)}
+.fox.mood-oops .fox-mouth{border-bottom:0;border-top:2px solid #6a4b51;border-radius:10px 10px 0 0;top:84px}
+.fox.mood-oops .eye{height:8px;top:57px}
+
+.fox.mood-wave .fox-paw.right{animation:koharu-wave .6s ease-in-out 3}
+.fox.mood-proud .fox-body{transform:translateY(-2px) scale(1.02)}
+.fox.mood-proud .fox-head{transform:translateY(-3px)}
+.fox.mood-proud .fox-mouth{width:13px}
+
+.fox.mood-celebrate{animation:koharu-celebrate .65s cubic-bezier(.22,.8,.25,1) 2}
+.fox.mood-celebrate .fox-star{animation:koharu-star-pop .65s ease-out 2}
+.fox.mood-celebrate .fox-tail{animation:koharu-tail-fast .25s ease-in-out 6}
+.fox.mood-celebrate .fox-paw.left{animation:koharu-paws-up .65s ease-in-out 2}
+.fox.mood-celebrate .fox-paw.right{animation:koharu-paws-up .65s .05s ease-in-out 2}
+
+.mini-fox{width:46px;height:46px;display:grid;place-items:center;border-radius:16px;background:#fff1e7;overflow:hidden;flex:none}
+.mini-koharu{position:relative;width:34px;height:32px;background:#ef9a70;border-radius:48% 48% 44% 44%;margin-top:6px}
+.mini-koharu:before,.mini-koharu:after{content:'';position:absolute;width:15px;height:18px;background:#ef9a70;top:-10px;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.mini-koharu:before{left:2px;transform:rotate(-12deg)}.mini-koharu:after{right:2px;transform:rotate(12deg)}
+.mini-koharu .m-eye{position:absolute;width:4px;height:5px;border-radius:50%;background:#55434a;top:14px;z-index:2}
+.mini-koharu .m-eye.left{left:9px}.mini-koharu .m-eye.right{right:9px}
+.mini-koharu .m-nose{position:absolute;width:4px;height:3px;border-radius:50%;background:#4a3c42;left:15px;top:21px;z-index:2}
+.mini-fox.mini-happy .mini-koharu{animation:koharu-mini-hop .4s ease}
+.mini-fox.mini-oops .mini-koharu{transform:translateY(3px) rotate(-3deg)}
+
+@keyframes koharu-idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes koharu-tail{0%,100%{transform:rotate(31deg)}50%{transform:rotate(42deg)}}
+@keyframes koharu-tail-fast{0%,100%{transform:rotate(25deg)}50%{transform:rotate(48deg)}}
+@keyframes koharu-blink{0%,46%,49%,100%{transform:scaleY(1)}47%,48%{transform:scaleY(.08)}}
+@keyframes koharu-hop{0%,100%{transform:translateY(0) scale(1)}45%{transform:translateY(-18px) scale(1.02)}70%{transform:translateY(2px) scale(.99)}}
+@keyframes koharu-wave{0%,100%{transform:rotate(0)}50%{transform:translateY(-17px) rotate(34deg)}}
+@keyframes koharu-paws-up{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-28px) rotate(12deg)}}
+@keyframes koharu-celebrate{0%,100%{transform:translateY(0) rotate(0)}45%{transform:translateY(-20px) rotate(-3deg)}70%{transform:translateY(-5px) rotate(3deg)}}
+@keyframes koharu-star-pop{0%{opacity:0;transform:scale(.2) rotate(-25deg)}40%{opacity:1;transform:scale(1.25) rotate(12deg)}100%{opacity:0;transform:scale(.8) rotate(35deg)}}
+@keyframes koharu-speech-in{from{opacity:0;transform:translateY(4px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes koharu-mini-hop{50%{transform:translateY(-5px)}}
+
+@media(max-width:760px){
+  .koharu-speech{left:16px;top:62px;max-width:160px;font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  .fox,.fox-tail,.eye{animation:none!important}
+  .fox.mood-happy,.fox.mood-celebrate,.fox.mood-wave .fox-paw.right{animation:none!important}
+}
