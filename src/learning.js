@@ -54,7 +54,7 @@ export function wordProgress(profile, wordId) {
 }
 
 function nextIntervalDays(stage) {
-  const intervals = [0, 1, 3, 7, 14, 30, 60, 120];
+  const intervals = [0, 3, 7, 14, 30, 60, 120, 240];
   return intervals[Math.min(stage, intervals.length - 1)];
 }
 
@@ -69,7 +69,11 @@ export function reviewWord(profile, wordId, grade, now = Date.now()) {
   if (grade === 'good') { stage = Math.min(7, stage + 1); xp = 6; }
   if (grade === 'easy') { stage = Math.min(7, stage + 2); xp = 9; }
 
-  const dueAt = grade === 'again' ? now + 5 * 60 * 1000 : now + nextIntervalDays(stage) * DAY_MS;
+  let dueAt;
+  if (grade === 'again') dueAt = now + 5 * 60 * 1000;
+  else if (grade === 'hard') dueAt = now + DAY_MS;
+  else dueAt = now + nextIntervalDays(stage) * DAY_MS;
+
   profile.progress[wordId] = {
     ...current,
     stage,
