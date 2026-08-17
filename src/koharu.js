@@ -1,3 +1,11 @@
+const koharuStyle = document.getElementById('koharuStyle') || document.createElement('link');
+if (!koharuStyle.id) {
+  koharuStyle.id = 'koharuStyle';
+  koharuStyle.rel = 'stylesheet';
+  koharuStyle.href = new URL('./koharu.css', import.meta.url).href;
+  document.head.appendChild(koharuStyle);
+}
+
 const mascot = document.getElementById('foxMascot');
 const stage = document.querySelector('.mascot-stage');
 let moodTimer = null;
@@ -156,7 +164,5 @@ document.addEventListener('click', (event) => {
     say('<b>새로운 길!</b> 천천히 가도 괜찮아요.');
     return;
   }
-  if (target.closest('[data-nav="home"], .brand')) {
-    setMood('wave');
-  }
+  if (target.closest('[data-nav="home"], .brand')) setMood('wave');
 });
