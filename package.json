@@ -1,0 +1,10 @@
+{
+  "name": "kotonoha-village",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check src/data.js && node --check src/learning.js && node --check src/app.js"
+  }
+}
