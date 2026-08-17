@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#fff7ee" />
+  <meta name="description" content="귀여운 여우 코하루와 함께 JLPT 일본어 단어를 매일 10개씩 공부하는 코토노하 마을." />
+  <title>ことのは村 · 코토노하 마을</title>
+  <link rel="stylesheet" href="./src/styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="brand" type="button" data-nav="home" aria-label="홈으로">
+        <span class="brand-mark">こ</span>
+        <span><b>ことのは村</b><small>코토노하 마을</small></span>
+      </button>
+      <div class="top-stats">
+        <span class="stat-pill fire"><i>🔥</i><b id="topStreak">0</b></span>
+        <span class="stat-pill xp"><i>✦</i><b id="topXp">0</b></span>
+      </div>
+    </header>
+
+    <main>
+      <section class="view active" id="view-home" data-view="home">
+        <div class="hero-card">
+          <div class="hero-copy">
+            <span class="eyebrow">TODAY IN KOTONOHA</span>
+            <h1>오늘도 단어<br><em>10개만 만나볼까요?</em></h1>
+            <p id="heroMessage">조금씩 자주 보는 게 제일 오래 남아요. 코하루가 기다리고 있어요.</p>
+            <div class="hero-actions">
+              <button class="primary big" id="startTodayButton" type="button"><span>오늘의 10단어 시작</span><b>→</b></button>
+              <button class="soft-button" type="button" data-nav="review"><span>복습하기</span><b id="dueBadge">0</b></button>
+            </div>
+          </div>
+          <div class="mascot-stage" aria-label="여우 마스코트 코하루">
+            <div class="sun"></div><div class="cloud c1"></div><div class="cloud c2"></div>
+            <div class="hill back"></div><div class="hill front"></div>
+            <div class="torii"><i></i><i></i><b></b><span></span></div>
+            <div class="fox" id="foxMascot">
+              <div class="fox-tail"></div><div class="fox-body"></div>
+              <div class="fox-head"><i class="ear left"></i><i class="ear right"></i><span class="face"><i class="eye left"></i><i class="eye right"></i><i class="nose"></i><i class="blush left"></i><i class="blush right"></i></span></div>
+              <div class="scarf"></div>
+            </div>
+            <div class="mascot-bubble"><b id="mascotLevel">Lv.1</b><span>코하루</span></div>
+          </div>
+        </div>
+
+        <section class="daily-progress-card">
+          <div class="section-head"><div><span class="eyebrow coral">DAILY QUEST</span><h2>오늘의 학습</h2></div><strong id="dailyCount">0 / 10</strong></div>
+          <div class="goal-bar"><i id="dailyBar"></i></div>
+          <div class="mini-stats">
+            <article><span>오늘 정답</span><b id="todayCorrect">0</b></article>
+            <article><span>연속 학습</span><b><i>🔥</i> <span id="streakStat">0일</span></b></article>
+            <article><span>전체 정확도</span><b id="accuracyStat">0%</b></article>
+          </div>
+        </section>
+
+        <section class="level-section">
+          <div class="section-head"><div><span class="eyebrow mint">CHOOSE A PATH</span><h2>어떤 길을 걸을까요?</h2></div></div>
+          <div class="level-grid">
+            <button class="level-card n5 active" type="button" data-level="N5"><span class="level-icon">🌱</span><div><small>처음 만나는 일본어</small><h3>JLPT N5</h3><p>생활 속 기초 단어부터 가볍게</p></div><strong id="n5Percent">0%</strong></button>
+            <button class="level-card n4" type="button" data-level="N4"><span class="level-icon">🌸</span><div><small>조금 더 자연스럽게</small><h3>JLPT N4</h3><p>일상 표현과 자주 쓰는 동사</p></div><strong id="n4Percent">0%</strong></button>
+          </div>
+        </section>
+
+        <section class="village-grid">
+          <button class="village-card study" type="button" data-nav="study"><span class="village-emoji">🍡</span><div><small>LEARN</small><h3>단어 찻집</h3><p>카드를 넘기며 오늘의 단어를 익혀요.</p></div><b>→</b></button>
+          <button class="village-card quiz" type="button" data-nav="quiz"><span class="village-emoji">⛩️</span><div><small>QUIZ</small><h3>신사 퀴즈</h3><p>4지선다로 기억을 빠르게 확인해요.</p></div><b>→</b></button>
+          <button class="village-card review" type="button" data-nav="review"><span class="village-emoji">🧺</span><div><small>REVIEW</small><h3>복습 바구니</h3><p>잊을 때쯤 다시 만나는 단어들.</p></div><b>→</b></button>
+          <button class="village-card library" type="button" data-nav="library"><span class="village-emoji">📚</span><div><small>COLLECTION</small><h3>내 단어책</h3><p>배운 단어와 숙련도를 한눈에 봐요.</p></div><b>→</b></button>
+        </section>
+      </section>
+
+      <section class="view" id="view-study" data-view="study">
+        <div class="page-head"><button class="back-button" type="button" data-nav="home">←</button><div><span class="eyebrow coral">WORD TEA HOUSE</span><h1>오늘의 단어</h1><p>카드를 눌러 뜻을 확인하고 기억 정도를 골라 주세요.</p></div><span class="page-counter" id="studyCounter">1 / 10</span></div>
+        <div class="study-layout">
+          <div class="word-card-wrap">
+            <button class="word-card" id="wordCard" type="button" aria-label="카드 뒤집기">
+              <div class="word-top"><span class="jlpt-chip" id="wordLevel">N5</span><button class="audio-button" id="speakButton" type="button" aria-label="발음 듣기">♪</button></div>
+              <div class="word-main"><span class="word-tag" id="wordTag">동물</span><strong id="wordText">猫</strong><ruby id="wordRuby"><span id="wordReading">ねこ</span></ruby><small>카드를 눌러 뜻 보기</small></div>
+              <div class="word-answer" id="wordAnswer"><b id="wordMeaning">고양이</b><p id="wordExample">猫が好きです。</p><span id="wordExampleKo">고양이를 좋아합니다.</span></div>
+            </button>
+            <div class="grade-panel" id="gradePanel">
+              <p>이 단어, 얼마나 기억나요?</p>
+              <div class="grade-grid">
+                <button type="button" data-grade="again"><i>↺</i><b>다시</b><small>5분 뒤</small></button>
+                <button type="button" data-grade="hard"><i>△</i><b>어려워요</b><small>1일</small></button>
+                <button type="button" data-grade="good"><i>○</i><b>알아요</b><small>3일+</small></button>
+                <button type="button" data-grade="easy"><i>✦</i><b>쉬워요</b><small>빠른 성장</small></button>
+              </div>
+            </div>
+          </div>
+          <aside class="session-side">
+            <div class="koharu-note"><div class="mini-fox">🦊</div><span>KOHARU TIP</span><p id="studyTip">소리 내서 한 번 읽고 뜻을 확인하면 기억이 더 오래 남아요.</p></div>
+            <div class="session-progress"><div><span>세션 진행</span><b id="studyPercent">0%</b></div><div class="goal-bar small"><i id="studyBar"></i></div></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-quiz" data-view="quiz">
+        <div class="page-head"><button class="back-button" type="button" data-nav="home">←</button><div><span class="eyebrow mint">SHRINE QUIZ</span><h1>기억 확인</h1><p>정답을 고르면 바로 이유를 확인할 수 있어요.</p></div><span class="page-counter" id="quizCounter">1 / 10</span></div>
+        <div class="quiz-shell">
+          <div class="quiz-card">
+            <div class="quiz-meta"><span id="quizMode">뜻 맞히기</span><b id="quizCombo">0 COMBO</b></div>
+            <div class="quiz-prompt"><small id="quizLevel">N5</small><strong id="quizWord">猫</strong><span id="quizReading">ねこ</span><button class="audio-button inline" id="quizSpeak" type="button">♪ 발음</button></div>
+            <div class="option-grid" id="optionGrid"></div>
+            <div class="quiz-feedback" id="quizFeedback" hidden><div><span id="feedbackIcon">✓</span><div><b id="feedbackTitle">정답이에요!</b><p id="feedbackText"></p></div></div><button class="primary" id="nextQuizButton" type="button">다음 문제 →</button></div>
+          </div>
+          <aside class="quiz-side"><div class="combo-card"><span>현재 연속 정답</span><strong id="comboBig">0</strong><small>5콤보마다 +5 XP 보너스</small></div><div class="koharu-note"><div class="mini-fox">🦊</div><span>QUICK TIP</span><p>보기 전에 먼저 머릿속으로 뜻을 떠올려 보세요.</p></div></aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-review" data-view="review">
+        <div class="page-head"><button class="back-button" type="button" data-nav="home">←</button><div><span class="eyebrow lavender">REVIEW BASKET</span><h1>복습 바구니</h1><p>지금 다시 보면 좋은 단어를 모아뒀어요.</p></div><span class="page-counter" id="reviewCount">0개</span></div>
+        <div class="review-summary"><div class="basket-visual">🧺<i id="basketCount">0</i></div><div><h2 id="reviewHeadline">복습할 단어가 없어요</h2><p id="reviewMessage">오늘 단어를 먼저 만나보면 복습 바구니가 채워집니다.</p><button class="primary" id="reviewStartButton" type="button">복습 시작</button></div></div>
+        <div class="review-list" id="reviewList"></div>
+      </section>
+
+      <section class="view" id="view-library" data-view="library">
+        <div class="page-head"><button class="back-button" type="button" data-nav="home">←</button><div><span class="eyebrow blue">MY KOTOBA BOOK</span><h1>내 단어책</h1><p>배운 단어, 아직 낯선 단어, 마스터한 단어를 모아봐요.</p></div></div>
+        <div class="library-toolbar"><div class="filter-segment" id="libraryFilter"><button class="active" type="button" data-filter="all">전체</button><button type="button" data-filter="learning">학습중</button><button type="button" data-filter="mastered">익숙함</button></div><label class="search-box">⌕<input id="librarySearch" type="search" placeholder="일본어·읽기·뜻 검색"></label></div>
+        <div class="library-stats" id="libraryStats"></div>
+        <div class="word-list" id="wordList"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="주요 메뉴">
+      <button class="active" type="button" data-nav="home"><span>🏡</span><b>마을</b></button>
+      <button type="button" data-nav="study"><span>🍡</span><b>학습</b></button>
+      <button type="button" data-nav="quiz"><span>⛩️</span><b>퀴즈</b></button>
+      <button type="button" data-nav="review"><span>🧺</span><b>복습</b></button>
+      <button type="button" data-nav="library"><span>📚</span><b>단어책</b></button>
+    </nav>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
